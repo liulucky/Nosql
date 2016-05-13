@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>梁芝的博客</title>
+
+    <link href="../Public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../Public/css/index.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="__PUBLIC__/js/html5shiv.min.js"></script>
+      <script src="__PUBLIC__/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    	<header class="container-fluid">
+    			<div class="container">
+    				<div class="col-md-8 col-xs-12 col-sm-8 title">
+	    				<h1>cpphp</h1>
+	    			</div>
+    			</div>
+    	</header>
+
+
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid" id="nav">
+		  	<div class="row">
+		  		<div class="container">
+		  			<div class="col-md-12 col-xs-12 col-sm-12">
+		 					<!-- Brand and toggle get grouped for better mobile display -->
+						    <div class="navbar-header">
+						      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navHidden" aria-expanded="false">
+						        <span class="sr-only">Toggle navigation</span>
+						        <span class="icon-bar"></span>
+						        <span class="icon-bar"></span>
+						        <span class="icon-bar"></span>
+						      </button>
+						    
+						    </div>
+
+				    		<!-- Collect the nav links, forms, and other content for toggling -->
+						    <div class="collapse navbar-collapse" id="navHidden">
+
+						      <ul class="nav navbar-nav">
+						        <li class="active">
+						        	<a href="#">首页 <span class="sr-only">(current)</span></a></li>
+						        <li><a href="#">PHP</a></li>
+                    <li><a href="#">Linux</a></li>
+						        <li><a href="#">Git</a></li>
+						        <li><a href="#">JavaScript</a></li>
+						        <li><a href="#">Node.JS</a></li>
+                    <li><a href="#">CSS</a></li>
+						      
+						      </ul>
+
+						    </div><!-- /.navbar-collapse -->
+					  </div><!-- /.container-fluid -->
+		  			</div>
+		  		</div>
+		  	</div>
+		   
+		</nav>
+
+		<!--主体部分-->
+		<section class="container-fluid">
+			<div class="container">
+
+				<div class="col-md-8 mainLeft">
+
+                    <article class="post">
+                        <div class="title-div">
+                            <h2>
+                                <a href="">搭建Git服务器</a>
+                            </h2>
+                            <div>
+                                作者：梁芝 • 2016年4月2日
+                            </div>
+                        </div>
+
+                        <div class="post-content">
+                            <p>
+                                <p>在使用Git，大部分开发者都是将<a href="http://www.github.com/" style="color:red;text-decoration:underline">Github</a>作为远程仓库。但是，当我们不想将代码开源，而且又有自己的服务器(以CentOS系统为例),那就可以自己搭建一台Git服务器作为自己的私有仓库。</p>
+                              
+                              <p>
+                                首先，你得有root权限。步骤如下：
+
+                              </p>
+
+                              <p>
+                                第一步：安装<code>Git</code>
+                                <p>
+                                  <pre># yum -y install git</pre>
+
+                                </p>
+
+                              </p>
+                              <p>
+                                第二步：创建<code>Git</code>用户，这个用户是用来运行<code>Git</code>的。(可以不为这个用户设置密码)
+                                <p>
+                                  <pre>#useradd git</pre>
+
+                                </p>
+
+                              </p>
+
+                              <p>
+                                第三步：创建私钥公钥
+                                <p>
+                                  创建SSH Key，在用户主目录下(Window的在C:\Users\你的用户名\.ssh下)，在Window下打开Git Bash,使用如下命令创建 
+                                  <pre>ssh-keygen -t rsa -C "youremail@example.com"  //邮箱写你自己的</pre>
+
+                                  <p>
+                                      去到用户主目录里找到.ssh目录，有<code>id_rsa</code>和<code>id_rsa.pub</code>两个文件，<code>id_rsa</code>是私钥，不要泄露出去，<code>id_rsa.pub</code>是公钥，可以公开。
+
+                                  </p>
+
+                                  <p>
+                                    
+                                      将所有需要登录的用户的公钥，也就是<code>id_rsa.pub</code>文件的内容，把公钥放到<code>/home/git/.ssh/authorized_keys</code>文件里，一行一个。如果没有这个文件，就自行创建。
+                                  </p>
+
+                                </p>
+
+                              </p>
+
+                              <p>
+                                第四步：初始化Git仓库
+                                <p>
+                                    先选定一个目录作为Git仓库，假设是<code>/usr/local/apache/htdocs/test/tmp.git</code>
+                                    在<code>/usr/local/apache/htdocs/test/</code>目录下输入命令：
+                                    <pre>git init --bare tmp.git //--bare表示创建裸仓库，只会生成用于记录版本库历史记录的.git文件。没有工作目录</pre>
+
+                                    <p>
+                                      授权：
+                                      <pre>chown -R git:git tmp.git</pre>
+
+                                    </p>
+                                </p>
+                                <p>
+                                    第五步：不让git 用shell登录
+                                    <p>
+                                        为了安全，创建的git用户不可以登录shell,通过编译<code>/etc/passwd</code>文件,找到git用户
+                                        <pre>git:x:505:505::/home/git:/usr/bin/bash</pre>
+                                        <p>改成：</p>
+                                        <pre>git:x:505:505::/home/git:/usr/bin/git-shell</pre>
+                                    </p>
+
+                                </p>
+
+                                
+
+                              </p>
+
+                              <p>
+                                  最后一步，在你的Window电脑克隆远程仓库的代码
+
+                                  <pre>git clone@ip:/usr/local/apache/htdocs/test/tmp.git</pre>
+
+                                  例如：<img src="../Public/images/upload/gitsample.png" alt="">
+
+                              </p>
+                        
+                            </p>
+                         
+                           
+                        </div>
+
+ 
+
+                        <footer class="post-footer clearfix">
+                            <div class="pull-left tag-list">
+                                <i class="fa fa-folder-open-o"></i>
+                                <a href="/tag/lumen/">Git搭建服务器</a>, <a href="/tag/xin-ban-ben-fa-bu/">Git搭建服务器实例</a>
+                            </div>
+                            <div class="pull-right share">
+                            </div>
+                        </footer>
+                    </article>
+					
+				
+				</div>
+				<aside class="col-md-3 hidden-sm hidden-xs mainRight ">
+					<div class="widget">
+						<div class="aside">
+							<h4>近期文章</h4>
+						</div>
+						<div class="content">
+							<p>
+								<a href="#">
+									搭建Git服务器
+								</a>
+								
+							</p>
+							<p>
+								<a href="">
+									从HTTP协议角度看GET与POST请求的区别
+								</a>
+								
+							</p>
+						</div>
+					</div>
+
+
+				</aside>
+			</div>
+
+		</section>
+
+   
+    <script src="../Public/js/jquery.js"></script>
+  
+    <script src="../Public/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
