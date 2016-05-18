@@ -57,12 +57,13 @@
 						      <ul class="nav navbar-nav">
 						        <li class="active">
 						        	<a href="#">首页 <span class="sr-only">(current)</span></a></li>
-						        <li><a href="#">PHP</a></li>
-                    <li><a href="#">Linux</a></li>
+                    <li><a href="#">PHP</a></li>
+						        <li><a href="./html/wechat.html">微信开发</a></li>
+                    <li><a href="#" class="noContent">Linux</a></li>
 						        <li><a href="./html/index.html">Git</a></li>
-						        <li><a href="#">JavaScript</a></li>
-						        <li><a href="#">Node.JS</a></li>
-                    <li><a href="#">CSS</a></li>
+						        <li><a href="#" class="noContent">JavaScript</a></li>
+						        <li><a href="#" class="noContent">Node.JS</a></li>
+                    <li><a href="#" class="noContent">CSS</a></li>
 						      
 						      </ul>
 
@@ -300,5 +301,16 @@
     <script src="./Public/js/jquery.js"></script>
   
     <script src="./Public/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+      $('.noContent').click(function(){
+
+          var content = $(this).text();
+
+          alert('暂时没有'+content+'的内容,请期待');
+
+      });
+
+    </script>
   </body>
 </html>
