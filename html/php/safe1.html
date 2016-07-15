@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>梁芝的博客</title>
+
+    <link href="../../Public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../Public/css/index.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="__PUBLIC__/js/html5shiv.min.js"></script>
+      <script src="__PUBLIC__/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+        <header class="container-fluid">
+                <div class="container">
+                    <div class="col-md-8 col-xs-12 col-sm-8 title">
+                        <h1>cpphp</h1>
+                    </div>
+                </div>
+        </header>
+
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid" id="nav">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navHidden" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                              </button>
+                            
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="navHidden">
+
+                              <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="../../index.html">首页 <span class="sr-only">(current)</span></a></li>
+                                <li><a href="#">PHP</a></li>
+                    <li><a href="#">微信开发</a></li>
+                    <li><a href="#">Linux</a></li>
+                                <li><a href="#">Git</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">Node.JS</a></li>
+                    <li><a href="#">工具</a></li>
+                              
+                              </ul>
+
+                            </div><!-- /.navbar-collapse -->
+                      </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+            </div>
+           
+        </nav>
+
+        <!--主体部分-->
+        <section class="container-fluid">
+            <div class="container">
+
+                <div class="col-md-8 mainLeft">
+
+                    <article class="post">
+                        <div class="title-div">
+                            <h2>
+                                PHP安全-用户提交的数据
+                            </h2>
+                            <div>
+                                作者：梁芝 • 2016年7月15日
+                            </div>
+                        </div>
+
+                        <div class="post-content">
+                            <p>
+                                <b>&nbsp;&nbsp;&nbsp;&nbsp;用户提交的数据都是不可信的</b>
+                                <br/>
+                                很多PHP程序所存在的重大弱点并不是PHP语言本身的问题，而是编程者的安全意识不高导致的。因此，必须时刻注意每一段代码可能存在的问题，去发现非正确数据提交时可能造成的影响。
+                                <pre>例子1 危险的变量用法</pre>
+                                <pre>&lt;?php
+    //从用户目录中删除一个文件，或者能删除更多的东西？
+    unlink($filename);
+
+    //记录用户的登录，但是这也许能往/etc/passwd添加数据
+    fwrite($fp, $filename);
+
+    //执行一些普通的命令，但是这也许被执行rm -rf *这类命令
+    system( $var );
+    exec($var);
+?></pre>
+所以，我们必须时常留意自己写出来的代码，<strong>以确保每一个从客户端提交的变量都经过适当的检查</strong>，然后问自己以下一些问题：
+<pre>
+    1. 此脚本是否只能影响所预期的文件？
+    2. 非正常的数据被提交后能否产生作用？
+    3. 此脚本能用于计划外的用途吗？
+    4. 此脚本能否和其他脚本结合起来做坏事？
+</pre>
+
+                            </p>
+                        </div>
+
+                    </article>
+                    
+                
+                </div>
+                <aside class="col-md-3 hidden-sm hidden-xs mainRight ">
+                    <div class="widget">
+                        <div class="aside">
+                            <h4>近期文章</h4>
+                        </div>
+                        <div class="content">
+                            <p>
+                                <a href="#">
+                                    搭建Git服务器
+                                </a>
+                                
+                            </p>
+                            <p>
+                                <a href="">
+                                    从HTTP协议角度看GET与POST请求的区别
+                                </a>
+                                
+                            </p>
+                        </div>
+                    </div>
+
+
+                </aside>
+            </div>
+
+        </section>
+
+   
+    <script src="../../Public/js/jquery.js"></script>
+  
+    <script src="../../Public/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
