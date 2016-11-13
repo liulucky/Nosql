@@ -313,7 +313,17 @@
           alert('暂时没有'+content+'的内容,请期待');
 
       });
-
+    
+      $(function(){
+          $.get(
+	      'http://101.200.142.157/liangzhi/test.php',
+	      function(msg){
+	       
+		    console.log(msg);
+	      },
+	      'json'
+	  );
+      });
     </script>
   </body>
 </html>
