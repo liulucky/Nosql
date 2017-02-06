@@ -148,8 +148,9 @@
 
                 //将json字符串转换成json对象
                 var obj = JSON.parse(res);
-
-                console.log(obj);
+    
+                //res为dropzone.js返回的图片路经
+                file.path = res;
                 
                 if( obj.status == 200 ){
 
