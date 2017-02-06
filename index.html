@@ -164,9 +164,19 @@
 
                 
             });
+
             this.on("removedfile", function(file) {
-                console.log("File " + file.name + "removed");
+                
+
+                $.ajax({
+                  url: "改成你的php删除图片的路径",
+                  type: "post",
+
+                  //file.path可以获取到点击删除按钮的那张图片
+                  data: { 'path': file.path }
+                });
             });
+
         }
     });
 
