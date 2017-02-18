@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>梁芝的博客</title>
+
+    <link href="../../Public/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../Public/css/index.css" />
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="__PUBLIC__/js/html5shiv.min.js"></script>
+      <script src="__PUBLIC__/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+        <header class="container-fluid">
+                <div class="container">
+                    <div class="col-md-8 col-xs-12 col-sm-8 title">
+                        <h1>cpphp</h1>
+                    </div>
+                </div>
+        </header>
+
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid" id="nav">
+            <div class="row">
+                <div class="container">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navHidden" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                              </button>
+                            
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="navHidden">
+
+                              <ul class="nav navbar-nav">
+                                <li class="active">
+                                    <a href="../../index.html">首页 <span class="sr-only">(current)</span></a></li>
+                              </ul>
+
+                            </div><!-- /.navbar-collapse -->
+                      </div><!-- /.container-fluid -->
+                    </div>
+                </div>
+            </div>
+           
+        </nav>
+
+        <!--主体部分-->
+        <section class="container-fluid">
+            <div class="container">
+
+                <div class="col-md-8 mainLeft">
+
+                    <article class="post">
+                        <div class="title-div">
+                            <h2>
+                                Redis中模仿多关键字查询(摘自The Little Redis Book)
+                            </h2>
+                            <div>
+                                作者：梁芝 • 2017年2月18日
+                            </div>
+                        </div>
+
+                        <div class="post-content">
+                            <p>通常，我们会想着通过不同的关键字去查询相同的值。例如,想通过邮箱去获取用户的具体信息，或者通过用户id(在用户登陆后)去获取。</p>
+
+                            <p>
+                                一种解决方法：将用户的信息变成JSON格式分别存放到两个字符串值。
+
+                                <pre>set user:gzphper@163.com "{id:20,email:'gzphper@163.com'}"
+set user:20 "{id:20,email:'gzphper@163.com'}"
+                                </pre>
+
+                                <p>这种方法很糟糕，如此不但会产生两倍数量的内存，而且这将会成为数据管理的恶梦。</p>
+
+<p>如果Redis允许你将一个关键字链接到另一个的话，可能情况会好很多，可惜Redis并没有提供这样的功能（而且很可能永远都不会提供）。Redis发展到现在，其开发的首要目的是要保持代码和API的整洁简单，关键字链接功能的内部实现并不符合这个前提（对于关键字，我们还有很多相关方法没有谈论到）。其实，Redis已经提供了解决的方法：散列。</p>
+
+使用散列数据结构，我们可以摆脱重复的缠绕：
+
+<pre>set users:9001 "{id: 9001, email: 'gzphper@163.com'}"
+hset users:lookup:email gzphper@163.com 9001</pre>
+<p>我们所做的是，使用域来作为一个二级索引，然后去引用单个用户对象。要通过id来获取用户信息，我们可以使用一个普通的get命令：</p>
+
+<pre>get users:9001</pre>
+<p>而如果想通过电子邮箱来获取用户信息，我们可以使用hget命令再配合使用get命令（PHP代码）：</p>
+
+<pre>
+$id = redis.hget('users:lookup:email', 'phper@163.com')
+$user = redis.get("users:{$id}")</pre>
+你很可能将会经常使用这类用法。在我看来，这就是散列真正耀眼的地方。在你了解这类用法之前，这可能不是一个明显的用例。
+
+
+
+
+                            </p>
+                        </div>
+
+                    </article>
+                    
+                
+                </div>
+               
+            </div>
+
+
+
+        </section>
+               <nav class="pagination" role="navigation">
+
+              <span class="page-number">第 1 页 ⁄ 共 2 页</span>
+              <a class="newer-posts" href="./safe1.html">
+                <i class="fa fa-angle-left">&gt;</i>
+              </a>
+            </nav>   
+   
+    <script src="../../Public/js/jquery.js"></script>
+  
+    <script src="../../Public/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
+
