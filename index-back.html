@@ -68,7 +68,6 @@
                     <li><a href="./html/article.html">好文分享</a></li>
                     <li><a href="./html/tool.html">工具</a></li>
                     <li><a href="./html/others/list.html">杂谈</a></li>
-                    <li><a href="./html/redis/redis.html">redis</a></li>
 						      
 						      </ul>
 
@@ -149,9 +148,8 @@
 
                 //将json字符串转换成json对象
                 var obj = JSON.parse(res);
-    
-                //res为dropzone.js返回的图片路经
-                file.path = res;
+
+                console.log(obj);
                 
                 if( obj.status == 200 ){
 
@@ -166,19 +164,9 @@
 
                 
             });
-
             this.on("removedfile", function(file) {
-                
-
-                $.ajax({
-                  url: "改成你的php删除图片的路径",
-                  type: "post",
-
-                  //file.path可以获取到点击删除按钮的那张图片
-                  data: { 'path': file.path }
-                });
+                console.log("File " + file.name + "removed");
             });
-
         }
     });
 
@@ -289,18 +277,6 @@
 							     <a href="./html/mysql/MySQL优化.html">MySQL优化</a>
 								
 							</p>
-
-				              <p>
-				                   <a href="./index.html" title="请看上传插件dropzone.js实例">新增dropzone.js删除图片方法</a>
-				                
-				              </p>
-				              <p>
-				              	<a href="http://www.cnblogs.com/billyxp/p/3701124">如何解决秒杀的性能问题和超卖的讨论</a>
-				              </p>
-				              <p>
-				              	<a href="./html/redis/redis.html">redis</a>
-				              </p>
-
 						</div>
 					</div>
 

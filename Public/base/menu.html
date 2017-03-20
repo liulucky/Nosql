@@ -1,0 +1,70 @@
+<header class="container-fluid">
+	<div class="container">
+		<div class="col-md-8 col-xs-12 col-sm-8 title">
+			<h1>cpphp's Blog</h1>
+		</div>
+
+		<div class="searchBox col-md-3 col-xs-12">
+			<form class="form-line">
+				<h2>
+					<input type="search" class="form-control" name="search" placeholder="输入内容后回车搜索"/>
+				</h2>
+
+			</form>
+		</div>
+	</div>
+</header>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid" id="nav">
+  	<div class="row">
+  		<div class="container">
+  			<div class="col-md-12 col-xs-12 col-sm-12">
+ 					<!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navHidden" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				    
+				    </div>
+
+		    		<!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="navHidden">
+
+				      <ul class="nav navbar-nav">
+				        <li class="active">
+				        	<a href="#">首页 <span class="sr-only">(current)</span></a></li>
+                <li><a href="./html/php/safe.html">PHP</a></li>
+				        <li><a href="./html/wechat.html">微信开发</a></li>
+				        <li><a href="./html/index.html">Git</a></li>
+				        <li><a href="./html/mysql/MySQL优化.html">MySQL</a></li>
+				   
+                <li><a href="./html/article.html">好文分享</a></li>
+                <li><a href="./html/tool.html">工具</a></li>
+                <li><a href="./html/others/list.html">杂谈</a></li>
+				      
+				      </ul>
+
+				    </div><!-- /.navbar-collapse -->
+			  </div><!-- /.container-fluid -->
+  			</div>
+  		</div>
+  	</div>
+   
+</nav>
+<script type="text/javascript">
+	
+	$(function(){
+
+		//get site menu
+		$.get(
+          'http://101.200.142.157/liangzhi/githubBlog/index.php/Home/Size/getSizeMenu',
+          function(msg){
+            console.log(msg);
+          }
+        );
+	});
+</script>
